@@ -1,0 +1,159 @@
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+#topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: calc(var(--topbar-h) + var(--safe-top));
+  padding-top: var(--safe-top);
+  background: var(--topbar-bg);
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  align-items: center;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+#topbar h1 {
+  text-align: center;
+  color: var(--accent);
+  font-family: Impact, 'Arial Black', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+}
+.icon-btn {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 1.5rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.icon-btn:active { background: var(--surface); }
+.icon-btn[hidden] { visibility: hidden; }
+
+#view {
+  flex: 1;
+  padding: 16px 16px calc(var(--tabbar-h) + 24px + var(--safe-bottom));
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ===== Responsive ===== */
+/* Tablet: cards a 2 colonne */
+@media (min-width: 720px) {
+  #view {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .stack.grid-md-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+}
+
+/* Desktop: layout pi\u00f9 ariosa, container ampio, tabbar centrato */
+@media (min-width: 1024px) {
+  :root { --tabbar-h: 72px; --topbar-h: 64px; }
+  #view { max-width: 980px; }
+  #tabbar {
+    max-width: 720px;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    border-radius: 16px 16px 0 0;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    box-shadow: var(--shadow);
+  }
+  #tabbar a { font-size: .75rem; }
+  #tabbar a .ico-svg { width: 26px; height: 26px; }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  #view { padding: 12px 10px calc(var(--tabbar-h) + 20px + var(--safe-bottom)); }
+  .card { padding: 12px; }
+  #tabbar a { font-size: .62rem; }
+  #tabbar a .ico-svg { width: 22px; height: 22px; }
+  .set-row { grid-template-columns: 28px 1fr 1fr 50px 36px; gap: 4px; }
+  .set-row.timed { grid-template-columns: 28px 1fr 1fr 34px 44px 36px; }
+  .set-row input { font-size: .85rem; padding: 6px 4px; }
+  #rest-overlay .clock { font-size: 5rem; }
+}
+
+#tabbar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 50;
+  height: calc(var(--tabbar-h) + var(--safe-bottom));
+  padding-bottom: var(--safe-bottom);
+  background: var(--tabbar-bg);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+}
+#tabbar a {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: var(--text-faint);
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-weight: 600;
+  padding: 6px 0;
+  border-top: 2px solid transparent;
+}
+#tabbar a .ico { font-size: 1.3rem; }
+#tabbar a .ico-svg { width: 24px; height: 24px; margin-bottom: 2px; }
+#tabbar a.active {
+  color: var(--accent);
+  border-top-color: var(--accent);
+}
+
+/* ===== Outline SVG icons ===== */
+.ico-svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: inline-block;
+  vertical-align: middle;
+}
+.icon-btn .ico-svg { width: 22px; height: 22px; }
+
+/* ===== View transitions ===== */
+.view-section { animation: fadeIn .2s ease-out; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Grids ===== */
+.grid { display: grid; gap: 12px; }
+.grid-2 { grid-template-columns: 1fr 1fr; }
+.stack { display: flex; flex-direction: column; gap: 12px; }
+.row { display: flex; gap: 8px; align-items: center; }
+.row.between { justify-content: space-between; }
+.row.wrap { flex-wrap: wrap; }
+.spacer { flex: 1; }
+
+/* ===== Section headers ===== */
+.section-title {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: .8rem;
+  color: var(--text-dim);
+  margin: 20px 0 10px;
+  font-weight: 700;
+}
