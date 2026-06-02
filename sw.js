@@ -1,5 +1,5 @@
 // Service Worker WARFIT
-// Strategie:
+// Strategie usate:
 //  - navigation (HTML)            : network-first → cache → fallback index.html
 //  - asset statici stessa origine : cache-first con revalidate in background
 //  - OpenFoodFacts API            : stale-while-revalidate (offline dopo 1a query)
