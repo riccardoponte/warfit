@@ -207,7 +207,16 @@ function renderExercise(ex, idx, root) {
   const head = el('div', { class: 'ex-head' });
   head.appendChild(el('span', { class: 'drag-handle' }, '⋮⋮'));
   const nameWrap = el('div', { class: 'ex-name' });
-  nameWrap.appendChild(el('div', {}, `${idx+1}. ${ex.name}`));
+  const nameRow = el('div', { class: 'row', style: { gap: '6px', alignItems: 'center' } });
+  nameRow.appendChild(el('div', { style: { flex: '1', minWidth: '0' } }, `${idx+1}. ${ex.name}`));
+  nameRow.appendChild(el('button', {
+    class: 'icon-btn small',
+    style: { width: '28px', height: '28px', flex: '0 0 auto' },
+    title: 'Rinomina esercizio',
+    'aria-label': 'Rinomina esercizio',
+    onclick: (e) => { e.stopPropagation(); renameExercise(ex, root); }
+  }, '✏️'));
+  nameWrap.appendChild(nameRow);
   const meta = el('div', { class: 'ex-meta' });
   meta.appendChild(document.createTextNode(`${ex.sets.length} × ${ex.reps}`));
   if (ex.rest) meta.appendChild(document.createTextNode(` · 🕐 ${ex.rest}s`));
